@@ -20,7 +20,8 @@ class DFS
      * Class constructor
      * @param array $aGraph
      */
-    public function DFS(array $aGraph) {
+    public function DFS(array $aGraph)
+    {
 
         if (!is_null($aGraph))
             $this->graph = $aGraph;
@@ -29,6 +30,18 @@ class DFS
     }
 
 
+    /**
+     * Getting the path from source to destination in the graph
+     * @param int $source
+     * @param int $destination
+     * @return array with path in it
+     */
+    public function pathBetween(int $source, int $destination) : array
+    {
+        $path = [];
+
+        return $path;
+    }
 
 
 }
