@@ -36,4 +36,15 @@ class DFSTest extends \PHPUnit_Framework_TestCase
         $this->assertSame([0,1,2,4,3], $dfs->getVisited());
 
     }
+
+    /**
+     * Testing Oriented graph
+     */
+    public function testOrientedPathFrom()
+    {
+        $dfs = new DFS([[1, 2], [3,4], [5], [6], [6], [4,6],[]]);
+        $dfs->pathFrom(0);
+
+        $this->assertSame([0,1,3,6,4,2,5], $dfs->getVisited());
+    }
 }
