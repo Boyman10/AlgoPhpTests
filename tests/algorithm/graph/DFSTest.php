@@ -22,4 +22,18 @@ class DFSTest extends \PHPUnit_Framework_TestCase
         $this->assertSame([], $dfs->pathBetween(0,4));
 
     }
+
+
+    public function testPathFrom()
+    {
+        $dfs = new DFS([[1, 2, 5], [0, 2, 5], [0, 1], [4, 5], [3, 5], [0, 1, 3, 4]]);
+        $dfs->pathFrom(0);
+
+        $this->assertSame([0,1,2,5,3,4], $dfs->getVisited());
+
+        $dfs = new \Graph\DFS([[1,2,3],[0,2],[0,1,4],[0],[2]]);
+        $dfs->pathFrom(0);
+        $this->assertSame([0,1,2,4,3], $dfs->getVisited());
+
+    }
 }
