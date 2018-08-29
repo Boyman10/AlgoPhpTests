@@ -29,6 +29,22 @@ class DFS
             $this->graph = array();
     }
 
+    /**
+     * @return array
+     */
+    public function getGraph()
+    {
+        return $this->graph;
+    }
+
+    /**
+     * @param array $graph
+     */
+    public function setGraph($graph)
+    {
+        $this->graph = $graph;
+    }
+
 
     /**
      * Getting the path from source to destination in the graph
