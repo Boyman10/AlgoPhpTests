@@ -38,6 +38,13 @@ class Graph
         $this->graph = $graph;
     }
 
+    /**
+     * @param int $node
+     */
+    public function addNode(int $node) : void
+    {
+        $this->graph[$node] = [];
+    }
 
     /**
      * Adding link between 2 vertices
