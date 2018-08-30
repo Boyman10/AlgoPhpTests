@@ -2,22 +2,26 @@
 
 namespace Graph;
 
-require_once "../../../src/algorithm/graph/DFS.php";
+//require_once "../../../src/algorithm/graph/entity\Graph.php";
+//require_once "../../../src/algorithm/graph/DFS.php";
 
+require "../../../vendor/autoload.php";
+
+use Graph\Entity\Graph;
 use Graph\DFS;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Created by PhpStorm.
- * User: admin
- * Date: 29/08/2018
- * Time: 21:13
+ * Created by Boyman10
  */
-class DFSTest extends \PHPUnit_Framework_TestCase
+class DFSTest extends TestCase
 {
 
     public function testPathBetween()
     {
-        $dfs = new DFS([[1, 2, 5], [0, 2, 5], [0, 1], [4, 5], [3, 5], [0, 1, 3, 4]]);
+        $graph = new Graph();
+        $graph->setGraph([0 => [1, 2, 5], 1 => [0, 2, 5], 2 => [0, 1], 3 => [4, 5], 4 => [3, 5], 5 => [0, 1, 3, 4]]);
+        $dfs = new DFS($graph);
 
         $this->assertSame([], $dfs->pathBetween(0,4));
 
@@ -26,12 +30,17 @@ class DFSTest extends \PHPUnit_Framework_TestCase
 
     public function testPathFrom()
     {
-        $dfs = new DFS([[1, 2, 5], [0, 2, 5], [0, 1], [4, 5], [3, 5], [0, 1, 3, 4]]);
+        $graph = new Graph();
+        $graph->setGraph([0 => [1, 2, 5], 1 => [0, 2, 5], 2 => [0, 1], 3 => [4, 5], 4 => [3, 5], 5 => [0, 1, 3, 4]]);
+
+        $dfs = new DFS($graph);
         $dfs->pathFrom(0);
 
         $this->assertSame([0,1,2,5,3,4], $dfs->getVisited());
 
-        $dfs = new \Graph\DFS([[1,2,3],[0,2],[0,1,4],[0],[2]]);
+        $graph->setGraph([0 => [1,2,3],1 => [0,2], 2 => [0,1,4], 3 => [0],[2]]);
+
+        $dfs = new \Graph\DFS($graph);
         $dfs->pathFrom(0);
         $this->assertSame([0,1,2,4,3], $dfs->getVisited());
 
@@ -42,7 +51,10 @@ class DFSTest extends \PHPUnit_Framework_TestCase
      */
     public function testOrientedPathFrom()
     {
-        $dfs = new DFS([[1, 2], [3,4], [5], [6], [6], [4,6],[]]);
+        $graph = new Graph();
+        $graph->setGraph([0 => [1, 2], 1 => [3,4], 2 => [5], 3 => [6], 4 => [6], 5 => [4,6], 6 => []]);
+
+        $dfs = new DFS($graph);
         $dfs->pathFrom(0);
 
         $this->assertSame([0,1,3,6,4,2,5], $dfs->getVisited());

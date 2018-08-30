@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace Graph;
 
+use Graph\Entity\Graph;
+
+//require_once "entity/Graph.php";
+
 /**
  * Depth First Search algorithm utility
  * Sample Graph : graph1 = [[1, 2, 5], [0, 2, 5], [0, 1], [4, 5], [3, 5], [0, 1, 3, 4]]
@@ -12,7 +16,7 @@ namespace Graph;
 class DFS
 {
     /**
-     * @var array representing a graph : array of list items
+     * @var Graph representing a graph : array of list items
      */
     private $graph;
 
@@ -30,44 +34,27 @@ class DFS
 
     /**
      * Class constructor
-     * @param array $aGraph
+     * @param Graph $aGraph
      */
-    public function __construct(array $aGraph)
+    public function __construct(Graph $aGraph)
     {
 
         if (!is_null($aGraph))
             $this->graph = $aGraph;
         else
-            $this->graph = array();
+            $this->graph = new Graph();
 
     }
-
-    /**
-     * @return array
-     */
-    public function getGraph()
-    {
-        return $this->graph;
-    }
-
-    /**
-     * @param array $graph
-     */
-    public function setGraph($graph)
-    {
-        $this->graph = $graph;
-    }
-
 
     /**
      * Determine the path from the source node traversing the whole graph using DFS algorithm
      * @param int $source
      */
-    public function pathFrom(int $source)
+    public function pathFrom(int $source) : void
     {
         $this->visited[] = $source;
 
-        foreach ($this->graph[$source] as $val) {
+        foreach ($this->graph->getGraph()[$source] as $val) {
 
             if (!in_array($val, $this->visited))
                 $this->pathFrom($val);
@@ -91,8 +78,8 @@ class DFS
         $visited = [];
         $stack = [];
 
-        foreach ($this->graph[$source] as $val) {
-            array_push($_stack, $val);
+        foreach ($this->graph->getGraph()[$source] as $val) {
+            array_push($stack, $val);
         }
 
 
