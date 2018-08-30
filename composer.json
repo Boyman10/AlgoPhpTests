@@ -1,0 +1,15 @@
+{
+    "name": "game/algo-php-tests",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Boyman10"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    }
+}
