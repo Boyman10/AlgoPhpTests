@@ -24,6 +24,13 @@ class DFS
     private $stack = [];
 
     /**
+     * @var int size
+     */
+    private $size = 0;
+
+    private $origin;
+
+    /**
      * @return array with path from source using DFS
      */
     public function getVisited(): array
@@ -31,6 +38,16 @@ class DFS
         return $this->visited;
     }
 
+    /**
+     * Reset everything except the graph :
+     */
+    public function reset() : void
+    {
+        $this->visited = [];
+        $this->stack = [];
+        $size = 0;
+        $origin = null;
+    }
 
     /**
      * Class constructor
@@ -54,13 +71,43 @@ class DFS
     {
         $this->visited[] = $source;
 
-        foreach ($this->graph->getGraph()[$source] as $val) {
+        if (array_key_exists ($source, $this->graph->getGraph()))
+            foreach ($this->graph->getGraph()[$source] as $val) {
 
-            if (!in_array($val, $this->visited))
-                $this->pathFrom($val);
+                if (!in_array($val, $this->visited))
+                    $this->pathFrom($val);
+            }
+
+    }
+
+    /**
+     * Determine the longest path from the source node traversing the whole graph using DFS algorithm
+     * @param int $source
+     */
+    public function longestPathFrom(int $source) : void
+    {
+        $this->visited[] = $source;
+
+        if (array_key_exists ($source, $this->graph->getGraph())) {
+            foreach ($this->graph->getGraph()[$source] as $val) {
+
+                if (!in_array($val, $this->visited) && !in_array($val, $this->stack))
+                    $this->pathFrom($val);
+            }
+
+            // @todo : we can update an array here by merging viisted and stack to get the path
+            $this->stack = [];
+            array_pop($this->visited);
+
+        } else {
+
+            // NO more path from that :
+            $this->size = (count($this->visited) > $this->size)? count($this->visited):$this->size;
+            $this->stack[] = array_pop($this->visited);
         }
 
     }
+
 
     /**
      * Getting the path from source to destination in the graph

@@ -59,4 +59,18 @@ class DFSTest extends TestCase
 
         $this->assertSame([0,1,3,6,4,2,5], $dfs->getVisited());
     }
+
+    /**
+     * Testing Oriented graph - unique path
+     */
+    public function testOrientedPathFromBis()
+    {
+        $graph = new Graph();
+        $graph->setGraph([1 => [2, 3], 3 => [4], 2 => [4,5], 10 => [11,1,3]]);
+
+        $dfs = new DFS($graph);
+        $dfs->longestPathFrom(10);
+
+        $this->assertSame([10,11,1,3,4], $dfs->getVisited());
+    }
 }
