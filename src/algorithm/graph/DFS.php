@@ -28,7 +28,13 @@ class DFS
      */
     private $size = 0;
 
-    private $origin;
+    /**
+     * @return int
+     */
+    public function getSize(): int
+    {
+        return $this->size;
+    }
 
     /**
      * @return array with path from source using DFS
@@ -92,7 +98,7 @@ class DFS
             foreach ($this->graph->getGraph()[$source] as $val) {
 
                 if (!in_array($val, $this->visited) && !in_array($val, $this->stack))
-                    $this->pathFrom($val);
+                    $this->longestPathFrom($val);
             }
 
             // @todo : we can update an array here by merging viisted and stack to get the path

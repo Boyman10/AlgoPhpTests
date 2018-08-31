@@ -71,6 +71,18 @@ class DFSTest extends TestCase
         $dfs = new DFS($graph);
         $dfs->longestPathFrom(10);
 
-        $this->assertSame([10,11,1,3,4], $dfs->getVisited());
+        $this->assertSame(4, $dfs->getSize());
+
+
+        // Other test :
+        $graph = new Graph();
+        $graph->setGraph([1 => [2, 3], 3 => [4]]);
+
+        $dfs = new DFS($graph);
+        $dfs->longestPathFrom(1);
+
+        $this->assertSame(3, $dfs->getSize());
+
+
     }
 }

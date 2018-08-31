@@ -1,0 +1,24 @@
+10 is visited
+there is a key
+   we iterate through 11,1,3
+       -> 3 paths
+       recursive :
+          11 is visited
+          no key (size of visited = 2)
+             --> remove 11 from stack and add it to the left stack
+          1 is visited
+		we iterate through 2,3
+                -> 2 paths
+                recursive :
+			2 is visited
+				iterate on 4,5 -> 2 paths
+				recursive
+					no key on 4 and 5 -> size of visited : 4
+					  -> remove 4 and 5 and add to the left stack
+			loose 2 -> to the stack
+
+			3 is visited
+				iterate on 4 -> 1 path
+				recursive
+					no key for 4
+				
